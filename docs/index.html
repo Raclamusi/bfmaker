@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>BFMaker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="CASL II のコードを Brainfuck のコードに変換するサイトです。">
+    <meta property="og:site_name" content="BFMaker">
+    <meta property="og:title" content="BFMaker">
+    <meta property="og:description" content="CASL II のコードを Brainfuck のコードに変換するサイトです。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raclamusi.github.io/bfmaker/">
+    <meta property="og:image" content="https://raclamusi.github.io/bfmaker/icon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@raclamusi">
+    <base href="">
+    <link rel="shortcut icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" type="text/css" href="top.css">
+</head>
+<body>
+    <header class="header">BFMaker</header>
+    <main class="main">
+        <p>CASL II を Brainfuck に変換します。</p>
+        <div class="code">
+            <textarea id="input" class="code_area" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            <span class="code_arrow">→</span>
+            <textarea id="output" class="code_area" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </div>
+        <div class="button">
+            <button id="compile" class="button_compile">変換</button>
+        </div>
+        <div class="option">
+            <div class="option_item">
+                <span class="option_label">EOF (end of file)</span>
+                <ul class="option_radio">
+                    <li><input type="radio" id="eof_minusone" name="eof" value="-1" checked><label for="eof_minusone">-1(255)</label></li>
+                    <li><input type="radio" id="eof_zero" name="eof" value="0"><label for="eof_zero">0</label></li>
+                </ul>
+            </div>
+            <div class="option_item">
+                <span class="option_label">汎用レジスタ</span>
+                <ul class="option_radio">
+                    <li><input type="radio" id="gr_8" name="gr" value="8" checked><label for="gr_8">GR0～GR7</label></li>
+                    <li><input type="radio" id="gr_16" name="gr" value="16"><label for="gr_16">GR0～GR15</label></li>
+                </ul>
+            </div>
+            <div class="option_item">
+                <label class="option_label" for="stack">スタック領域サイズ</label>
+                <input type="number" id="stack" value="64">
+            </div>
+            <div class="option_item">
+                <span class="option_label">コメント</span>
+                <ul class="option_radio">
+                    <li><input type="radio" id="comment_enabled" name="comment" value="enabled" checked><label for="comment_enabled">有効</label></li>
+                    <li><input type="radio" id="comment_disabled" name="comment" value="disabled"><label for="comment_disabled">無効</label></li>
+                </ul>
+            </div>
+        </div>
+        <p>変換されたコードは、セルの最小値が 0 、最大値が 255 、 255 に対するインクリメントが 0 、 0 に対するデクリメントが 255 の Brainfuck 環境で動作します。</p>
+        <p>一番上の START から実行されます。</p>
+        <p>文字列リテラルは UTF-8 で処理されます。</p>
+        <p>入力はラインフィード（ LF ）で区切られます。</p>
+        <p>ラベルは大文字、小文字が区別されます。</p>
+    </main>
+    <script type="text/javascript" src="top.js"></script>
+</body>
+</html>

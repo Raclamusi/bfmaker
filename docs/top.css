@@ -1,0 +1,80 @@
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background-color: lightcyan;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background-color: lightpink;
+}
+
+.main {
+    margin: 0 auto;
+    padding: 5rem 0;
+    max-width: 80rem;
+}
+
+.code {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.code_area {
+    flex-grow: 1;
+    height: 20rem;
+    margin: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.code_area.error {
+    color: red;
+}
+
+.code_arrow {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.button {
+    padding: 0 5rem;
+}
+
+.button_compile {
+    width: 100%;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
+.option {
+    margin: 2rem 3rem;
+    padding: 1rem;
+    border: 0.1rem solid black;
+}
+
+.option_item {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.option_label {
+    padding-right: 1rem;
+}
+
+.option_label::after {
+    content: ":";
+}
+
+.option_radio {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
