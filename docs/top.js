@@ -331,7 +331,7 @@ BUF      DS    256
         const programsWithLabelTable = programsWithBinary.map(program => {
           const labelTable = program.reduce((table, line) => {
             if (line.lineData.label === "") return table;
-            table[line.lineData.label] = line.offset;
+            table[line.lineData.label] = line.lineData.label in table ? null : line.offset;
             return table;
           }, {});
           const start = program.find(e => e.lineData.opcode === "START");
@@ -346,15 +346,31 @@ BUF      DS    256
           };
         });
         {
-          const msg = programsWithLabelTable.reduce(
+          let msg = "";
+          msg += programsWithLabelTable.reduce(
             (msg, program) => program.start.offset === undefined ? msg + `エラー: 行 ${program.start.index+1}: ラベル ${program.start.operands[0]} が定義されていません。\n    ${program.start.input}\n\n` : msg
+          , "");
+          msg += programsWithLabelTable.reduce(
+            (msg, program) => Object.entries(program.labelTable).filter(([k, v]) => v === null).reduce(
+              (msg, [label, offset]) => program.program.filter(e => e.lineData.label === label).reduce(
+                (msg, line) => msg + `エラー: 行 ${line.lineData.index+1}: ラベル ${label} が重複しています。\n    ${line.lineData.input}\n\n`
+              , msg)
+            , msg)
           , "");
           if (msg !== "") return [null, msg];
         }
         const globalLabelTable = programsWithLabelTable.reduce((table, program) => {
-          table[program.start.lineData.label] = program.start.offset;
+          table[program.start.lineData.label] = program.start.lineData.label in table ? null : program.start.offset;
           return table;
         }, {});
+        {
+          const msg = Object.entries(globalLabelTable).filter(([k, v]) => v === null).reduce(
+            (msg, [label, offset]) => programsWithLabelTable.filter(e => e.start.lineData.label === label).reduce(
+              (msg, program) => msg + `エラー: 行 ${program.start.lineData.index+1}: ラベル ${label} が重複しています。\n    ${program.start.lineData.input}\n\n`
+            , msg)
+          , "");
+          if (msg !== "") return [null, msg];
+        }
         const compiledProgram = [
           ...programsWithLabelTable.map(program => {
             const labelTable = {
