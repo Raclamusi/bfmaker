@@ -424,7 +424,7 @@ ${(">>>>>>>>>>>>>>>> >> ".repeat(4).trim() + "\n").repeat(option.gr === "16" ? 4
 ${
   (() => {
     const pr = programsWithLabelTable[0].start.offset;
-    return `${"++++++++++++++++ ".repeat(pr >> 12)}${"+".repeat(pr >> 8 & 0x0f)} >\n${"++++++++ ".repeat(pr >> 4 & 0x0f)}${"+".repeat(pr & 0x0f)} >`;
+    return `${"++++++++++++++++ ".repeat(pr >> 12)}${"+".repeat(pr >> 8 & 0x0f)} >\n${"++++++++++++++++ ".repeat(pr >> 4 & 0x0f)}${"+".repeat(pr & 0x0f)} >`;
   })()
 }
 
