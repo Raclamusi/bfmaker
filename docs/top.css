@@ -18,7 +18,7 @@ body {
 
 .main {
     margin: 0 auto;
-    padding: 5rem 0;
+    padding: 5rem 1rem;
     max-width: 80rem;
 }
 
@@ -27,12 +27,22 @@ body {
     align-items: center;
     margin: 1rem 0;
 }
+@media screen and (max-width: 540px) {
+    .code {
+        flex-direction: column;
+    }
+}
 
 .code_area {
     flex-grow: 1;
-    height: 20rem;
+    min-height: 20rem;
     margin: 1rem 2rem;
     font-size: 1rem;
+}
+@media screen and (max-width: 540px) {
+    .code_area {
+        min-width: 96%;
+    }
 }
 
 .code_area.error {
@@ -42,6 +52,15 @@ body {
 .code_arrow {
     font-size: 2rem;
     font-weight: 900;
+}
+
+.code_arrow::before {
+    content: "→";
+}
+@media screen and (max-width: 540px) {
+    .code_arrow::before {
+        content: "↓";
+    }
 }
 
 .button {
@@ -58,6 +77,16 @@ body {
     margin: 2rem 3rem;
     padding: 1rem;
     border: 0.1rem solid black;
+    overflow-x: auto;
+}
+@media screen and (max-width: 540px) {
+    .option {
+        margin: 2rem 1rem;
+    }
+}
+
+.option_scroll {
+    width: max-content;
 }
 
 .option_item {
